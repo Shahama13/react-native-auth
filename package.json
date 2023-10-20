@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "type": "module",
-  "engines":{
-    "node":">=4.20.1"
+  "engines": {
+    "node": ">=4.20.1"
   },
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start":"node server.js"
   },
   "author": "",
   "license": "ISC",
