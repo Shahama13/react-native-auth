@@ -51,13 +51,7 @@ export const verify = async (req, res) => {
     try {
         const otp = Number(req.body.otp)
         const user = await User.findById(req.user._id)
-        if (user.otp !== otp) {
-            console.log("here")
-        }
-        if (user.otp_expiry < Date.now()) {
-
-            console.log("jjjj")
-        }
+      
         if (user.otp !== otp || user.otp_expiry < Date.now()) {
             return res.status(400).json({
                 success: false,
@@ -332,9 +326,11 @@ export const updateTask = async (req, res) => {
 
         const { taskId } = req.params
         const user = await User.findById(req.user._id);
-        user.task = user.task.find((t) => t._id.toString() === taskId.toString())
+      const selectedTask =  user.task.find((t) => t._id.toString() === taskId.toString())
+        console.log(selectedTask)
 
-        user.task.completed = !user.task.completed
+        selectedTask.completed = !selectedTask.completed
+       
 
         await user.save()
 
