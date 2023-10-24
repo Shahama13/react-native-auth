@@ -143,9 +143,9 @@ export const getMyProfile = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { name } = req.body
-        const avatar = req.files.avatar.tempFilePath;
         const user = await User.findById(req.user._id)
-        if (avatar) {
+        if (req.files !== null) {
+            const avatar = req.files.avatar.tempFilePath;
             await cloudinary.v2.uploader.destroy(user.avatar.public_id)
             const myCloud = await cloudinary.v2.uploader.upload(avatar, {
                 folder: "auth"
